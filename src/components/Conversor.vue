@@ -15,7 +15,7 @@
       />
     </form>
     <h2>
-      {{ currencyB_value }}
+      {{ currencyB_value_formated }}
     </h2>
   </div>
 </template>
@@ -35,6 +35,18 @@ export default {
       currencyA_value: "",
       currencyB_value: parseFloat(0).toFixed(2),
     };
+  },
+  computed: {
+    currencyB_value_formated: {
+      get() {
+        let formated = Intl.NumberFormat("pt-BR", {
+          style: "currency",
+          currency: this.currencyB,
+        }).format(this.currencyB_value);
+
+        return formated;
+      },
+    },
   },
   methods: {
     converter() {
